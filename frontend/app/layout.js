@@ -1,6 +1,6 @@
 import "./globals.css"
 import ReduxProvider from "@/lib/providers/ReduxProvider"
-import Layout from "@/components/Layout"
+import Layout from "@/components/Layout.server"
 
 export const metadata = {
   metadataBase: new URL("https://greeknt.netlify.app/"),
@@ -18,7 +18,7 @@ export const metadata = {
   },
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>

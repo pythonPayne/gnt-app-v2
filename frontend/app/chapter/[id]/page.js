@@ -27,14 +27,14 @@ export async function generateMetadata({ params }) {
   const ch = parseInt(chap.chapId.slice(-2))
 
   const metadata = {
-    title: `${chap.bookNameAbbrev} ${ch}`,
-    description: `${chap.bookName} ${ch}: Interlinear Greek New Testament`,
+    title: `${chap.chapBook.bookNameAbbrev} ${ch}`,
+    description: `${chap.chapBook.bookName} ${ch}: Interlinear Greek New Testament`,
     alternates: {
       canonical: `/chapter/${chap.chapId}`,
     },
     openGraph: {
-      title: `${chap.bookNameAbbrev} ${ch}`,
-      description: `${chap.bookName} ${ch}: Interlinear Greek New Testament`,
+      title: `${chap.chapBook.bookNameAbbrev} ${ch}`,
+      description: `${chap.chapBook.bookName} ${ch}: Interlinear Greek New Testament`,
       url: `/chapter/${chap.chapId}`,
     },
   }

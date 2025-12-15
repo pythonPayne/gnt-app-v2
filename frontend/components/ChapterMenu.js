@@ -1,41 +1,9 @@
 "use client"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 
-export default function ChapterMenu() {
+export default function ChapterMenu({ books }) {
   const [bookOpen, setBookOpen] = useState("")
-  const [books, setBooks] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch("http://127.0.0.1:8000/graphql/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          query: `
-            query {
-              books {
-                bookId
-                bookName
-                bookNameAbbrev
-                bookNumChapters
-                bookNumVerses
-                bookNumWords                
-              }
-            }
-          `,
-        }),
-        cache: "no-store", // 🔑 client always no-store
-      })
-      const json = await res.json()
-      setBooks(json.data.books)
-      setLoading(false)
-    }
-    fetchData()
-  }, [])
 
   const book_menu = (book) => {
     let chs = [...Array(book.bookNumChapters).keys()].map((x) => x + 1)

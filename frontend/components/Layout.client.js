@@ -19,7 +19,7 @@ import {
 import ChapterMenu from "./ChapterMenu"
 import Link from "next/link"
 
-const Layout = (props) => {
+const Layout = ({ books }) => {
   const dispatch = useDispatch()
 
   const showMenu = useSelector((state) => state.layout.showMenu)
@@ -149,7 +149,7 @@ const Layout = (props) => {
                       Greek NT
                     </div>
                   </div>
-                  <ChapterMenu />
+                  <ChapterMenu books={books} />
                 </div>
               </div>
             )}
@@ -304,8 +304,6 @@ const Layout = (props) => {
           </div>
         </>
       )}
-
-      <div>{props.children}</div>
     </div>
   )
 }
