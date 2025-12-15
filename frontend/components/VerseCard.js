@@ -1,0 +1,156 @@
+"use client"
+import React, { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+
+import { useDispatch } from "react-redux"
+import { setLastVerseExpanded } from "../redux/actions/verseCard"
+import Link from "next/link"
+
+const VerseCard = (props) => {
+  const { verse } = props
+  const dispatch = useDispatch()
+  const [cardExpanded, setCardExpanded] = useState(props.open)
+
+  const dark = useSelector((state) => state.layout.dark)
+  const showGreek = useSelector((state) => state.verseCard.showGreek)
+  const showEnglish = useSelector((state) => state.verseCard.showEnglish)
+  const showParsId = useSelector((state) => state.verseCard.showParsId)
+  const showLexnId = useSelector((state) => state.verseCard.showLexnId)
+  const showGreekColor = useSelector((state) => state.verseCard.showGreekColor)
+  const lastVerseExpanded = useSelector(
+    (state) => state.verseCard.lastVerseExpanded
+  )
+
+  const lexnIdLastVisited = useSelector((state) => state.word.lexnIdLastVisited)
+  const parsIds = useSelector((state) => state.word.parsIds)
+
+  useEffect(() => {
+    if (verse.versId === lastVerseExpanded) {
+      setCardExpanded(true)
+    } else {
+      setCardExpanded(props.open)
+    }
+  }, [props.open])
+
+  return (
+    <div className={`mb-8 shadow-md max-w-[1100px]`}>
+      <div
+        className={`p-2 font-semibold cursor-pointer
+        border-l-2 border-r-2 border-t-2 
+        ${!cardExpanded && "border-b-2"}
+        ${
+          dark
+            ? "text-gray-300 bg-gray-700 bg-opacity-10 border-gray-900"
+            : "text-gray-500 border-gray-300"
+        }
+      `}
+        onClick={() => {
+          dispatch(setLastVerseExpanded(verse.versId))
+          setCardExpanded(!cardExpanded)
+        }}
+      >
+        {verse.versRefAbbrev}
+      </div>
+
+      {cardExpanded && (
+        <div
+          className={`flex flex-wrap p-1 ring-2 ring-inset
+          ${
+            dark
+              ? "bg-gray-700 bg-opacity-80 text-gray-200 ring-gray-900"
+              : "bg-white text-gray-700 ring-gray-300"
+          }
+          `}
+        >
+          {verse.word.map((w, i) => (
+            <Link
+              href={`/word/${w.wordLexn.lexnId}`}
+              key={i}
+              className={`flex flex-col mr-1 mb-1 p-1`}
+            >
+              {showGreek && (
+                <div
+                  className={`p-1 text-md
+                  ${
+                    dark && showGreekColor
+                      ? "text-gray-700"
+                      : dark && !showGreekColor
+                      ? "text-gray-300"
+                      : "text-gray-700"
+                  }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "V" &&
+                  "bg-yellow-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "NOUN" &&
+                  "bg-red-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "ADJ" &&
+                  "bg-blue-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "CONJ" &&
+                  "bg-purple-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "ART" &&
+                  "bg-gray-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "PRON" &&
+                  "bg-red-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "PREP" &&
+                  "bg-green-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "PRT" &&
+                  "bg-gray-200 bg-opacity-60"
+                }
+                ${
+                  showGreekColor &&
+                  w.wordPars.parsFunction === "ADV" &&
+                  "bg-gray-200 bg-opacity-60"
+                }
+                `}
+                >
+                  {w.wordGreek}
+                </div>
+              )}
+
+              {showEnglish && (
+                <div className={`p-1 text-xs`}>{w.wordEnglish}</div>
+              )}
+
+              {showParsId && (
+                <div className={`p-1 text-xs`}>{w.wordPars.parsId}</div>
+              )}
+
+              {showLexnId && (
+                <div className={`flex justify-between p-1 text-xs`}>
+                  <div className={`text-gray-400`}>{w.wordLexn.lexnGreek}</div>
+                  <div className={`text-gray-400 pl-3`}>
+                    {w.wordLexn.lexnFreqNt < 1000 && w.wordLexn.lexnFreqNt}
+                  </div>
+                </div>
+              )}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default VerseCard
