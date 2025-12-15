@@ -19,7 +19,7 @@ import {
 import Carousel from "@/components/Carousel"
 import Link from "next/link"
 
-export default function WordPageClient({ data }) {
+export default function WordPageClient({ word }) {
   const router = useRouter()
   const dispatch = useDispatch()
   const expandAllVerses = useSelector(
@@ -49,10 +49,10 @@ export default function WordPageClient({ data }) {
   const [verseClickedRef, setVerseClickedRef] = useState(null)
 
   useEffect(() => {
-    if (data.lexns[0].lexnId !== lexnIdLastVisited) {
+    if (word.lexnId !== lexnIdLastVisited) {
       dispatch(clearWordState())
-      dispatch(setLexnIdLastVisited(data.lexns[0].lexnId))
-      dispatch(setLexnGreekLastVisited(data.lexns[0].lexnGreek))
+      dispatch(setLexnIdLastVisited(word.lexnId))
+      dispatch(setLexnGreekLastVisited(word.lexnGreek))
     } else {
       setTimeout(function () {
         window.scrollTo(0, scrollPosition)
@@ -61,14 +61,10 @@ export default function WordPageClient({ data }) {
   }, [])
 
   useEffect(() => {
-    setLexn(data.lexns[0])
-    setPdgm(
-      data.lexns[0].pdgm.sort(
-        (a, b) => a.pdgmPars.parsRank - b.pdgmPars.parsRank
-      )
-    )
+    setLexn(word)
+    setPdgm(word.pdgm.sort((a, b) => a.pdgmPars.parsRank - b.pdgmPars.parsRank))
     setVerses(
-      data.lexns[0].pdgm
+      word.pdgm
         .map((pdgm) => pdgm.pdgmPars.word)
         .flat()
         .map((pdgm) => {
