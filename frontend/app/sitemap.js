@@ -15,6 +15,10 @@ export default async function sitemap() {
     query {
       chaps {
         chapId
+        chapBook{
+          bookName
+          bookNameAbbrev
+        }
       }
     }
   `
@@ -25,8 +29,10 @@ export default async function sitemap() {
     lastModified: new Date(),
   }))
 
-  const chapterUrls = chapters.chaps.map((chapter) => ({
-    url: `https://greeknt.netlify.app/chapter/${chapter.chapId}`,
+  const chapterUrls = chapters.chaps.map((ch) => ({
+    url: `https://greeknt.netlify.app/chapter/${
+      ch.chapBook.bookNameAbbrev
+    }-${parseInt(ch.chapId.slice(-2))}`,
     lastModified: new Date(),
   }))
 

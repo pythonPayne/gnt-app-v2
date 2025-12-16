@@ -59,11 +59,11 @@ const Layout = ({ books }) => {
       {/* not showing menu */}
       {!showMenu && (
         <div
-          className={`rounded-full fixed bottom-5 right-5 z-20 border-[3px]
+          className={`rounded-full fixed bottom-5 right-5 z-20 border-2
       ${
         dark
-          ? "bg-gray-800 bg-opacity-50 border-gray-900"
-          : "bg-gray-50 border-gray-300"
+          ? "bg-gray-800 bg-opacity-50 border-blue-900"
+          : "bg-gray-50 border-blue-300"
       } `}
         >
           <div

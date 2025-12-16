@@ -16,7 +16,6 @@ import {
   setParsIds,
   setLexnGreekLastVisited,
 } from "@/redux/actions/word"
-import Carousel from "@/components/Carousel"
 import Link from "next/link"
 
 export default function WordPageClient({ word }) {
@@ -539,62 +538,6 @@ export default function WordPageClient({ word }) {
               ${dark ? "bg-gray-800" : "bg-gray-50 "}
               `}
                 >
-                  {/* <div
-                    className={`flex justify-center py-10 space-x-1
-                ${dark ? "bg-gray-800" : "bg-gray-50 "}
-                `}
-                  >
-                    <Carousel
-                      parsVar={"parsTense"}
-                      visibleItem={parsTense}
-                      parsLabel={"T"}
-                      pdgm={pdgm}
-                      pdgmF={pdgmF}
-                    />
-                    <Carousel
-                      parsVar={"parsVoice"}
-                      visibleItem={parsVoice}
-                      parsLabel={"V"}
-                      pdgm={pdgm}
-                      pdgmF={pdgmF}
-                    />
-                    <Carousel
-                      parsVar={"parsMood"}
-                      visibleItem={parsMood}
-                      parsLabel={"M"}
-                      pdgm={pdgm}
-                      pdgmF={pdgmF}
-                    />
-                    <Carousel
-                      parsVar={"parsPerson"}
-                      visibleItem={parsPerson}
-                      parsLabel={"P"}
-                      pdgm={pdgm}
-                      pdgmF={pdgmF}
-                    />
-                    <Carousel
-                      parsVar={"parsCase"}
-                      visibleItem={parsCase}
-                      parsLabel={"C"}
-                      pdgm={pdgm}
-                      pdgmF={pdgmF}
-                    />
-                    <Carousel
-                      parsVar={"parsGender"}
-                      visibleItem={parsGender}
-                      parsLabel={"G"}
-                      pdgm={pdgm}
-                      pdgmF={pdgmF}
-                    />
-                    <Carousel
-                      parsVar={"parsNumber"}
-                      visibleItem={parsNumber}
-                      parsLabel={"N"}
-                      pdgm={pdgm}
-                      pdgmF={pdgmF}
-                    />
-                  </div> */}
-
                   <div className={`flex justify-center`}>
                     <div
                       className={`flex flex-col max-w-[768px] justify-center`}

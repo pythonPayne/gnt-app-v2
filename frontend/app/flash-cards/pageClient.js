@@ -167,8 +167,8 @@ export default function FlashCardsClient({ lexns }) {
               className={`h-[4.30rem] w-[4.30rem] cursor-pointer rounded-full pt-3 px-2 pb-2 
               ${
                 dark
-                  ? "fill-gray-800 bg-gray-800 bg-opacity-50 stroke-white border-[3px]  border-gray-900 md:hover:fill-gray-700"
-                  : "fill-gray-100 bg-gray-50 stroke-gray-700 border-[3px] border-gray-300 md:hover:stroke-gray-900"
+                  ? "fill-gray-800 bg-gray-800 bg-opacity-50 stroke-white border-2  border-blue-900 md:hover:fill-gray-700"
+                  : "fill-gray-100 bg-gray-50 stroke-gray-700 border-2 border-blue-300 md:hover:stroke-gray-900"
               }`}
               onClick={() => setShowSettings(!showSettings)}
             >

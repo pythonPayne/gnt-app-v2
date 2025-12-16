@@ -33,7 +33,7 @@ const VocabCard = ({ card, n, N }) => {
         style={cardStyle}
       >
         <div
-          className="ring-2 ring-gray-900 ring-opacity-50 w-full h-full absolute cursor-pointer"
+          className="ring-2 ring-gray-400 ring-opacity-50 w-full h-full absolute cursor-pointer"
           onClick={() => setShowingBack(!showingBack)}
           style={contentStyle}
         >
